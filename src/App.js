@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState, useRef } from 'react';
 import './App.css';
+import Header from './Header';
 
 
 function App() {
@@ -57,17 +58,13 @@ function App() {
   return (
     <div> 
       <div className="content-container">
-        <header className="header-container">
-          <div className='wrapper' >
-          <h1>Cryptocurrency Search </h1>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="search" className='sr-only'> Search for bit:  </label>
-            <input type="text" id="search" onChange={handleInput} value={userInput} />
-            <button> Search </button>
-          </form>            
-          </div>
+      <Header
+          handleInput={handleInput}
+          handleSubmit={handleSubmit}
+          setUserInput={setUserInput}
+          setSearchBit={userInput}
 
-        </header>
+      />
         <div>
         {bitcoin.map((bit) => {
           return (
