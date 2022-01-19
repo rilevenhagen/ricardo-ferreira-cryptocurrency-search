@@ -1,13 +1,90 @@
-import react from 'react';
+import axios from 'axios';
+import { useEffect, useState, useRef } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="">
 
-      </header>
+function App() {
+
+  const [bitcoin, setBit] = useState([]);
+  const [userInput, setUserInput] = useState('');
+  const [searchBit, setSearchBit] = useState('');
+
+
+  const firstUpdate = useRef(true);
+
+  useEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+
+    axios({
+      method: 'GET',
+      url: 'https://coingecko.p.rapidapi.com/coins/markets',
+      params: {
+        vs_currency: 'usd',
+        order: 'market_cap_desc',
+        ids: searchBit,
+
+      },
+      headers: {
+        'x-rapidapi-host': 'coingecko.p.rapidapi.com',
+        'x-rapidapi-key': '836053b102mshb0f14f728934a07p13c433jsne14af3cc3797'
+      }
+    }).then((response) => {
+      console.log(response.data);
+      setBit(response.data);
+    })
+      .catch(function (error) {
+        console.error(error);
+      })
+
+  }, [searchBit]);
+
+  const handleInput = (event) => {
+    setUserInput(event.target.value);
+  }
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setSearchBit(userInput)
+    setUserInput('')
+  }
+
+
+
+  return (
+    <div> 
+      <div className="content-container">
+        <header className="header-container">
+          <div className='wrapper' >
+          <h1>Cryptocurrency Search </h1>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="search" className='sr-only'> Search for bit:  </label>
+            <input type="text" id="search" onChange={handleInput} value={userInput} />
+            <button> Search </button>
+          </form>            
+          </div>
+
+        </header>
+        <div>
+        {bitcoin.map((bit) => {
+          return (
+            <div className='bit-display'  key={bit.id}>
+              <h2>Name of the Coin: {bit.name}</h2>
+              <h2>Corrent Price: ${bit.current_price}</h2>
+              <h2>Market Cap: {bit.market_cap}</h2>
+              <h2>Symbol: {bit.symbol}</h2>
+              <img src={bit.image} alt={bit.name} />
+            </div>
+          )
+        })}
+      </div>
+      </div>
+
     </div>
+
   );
 }
 
