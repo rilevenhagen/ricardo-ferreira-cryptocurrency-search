@@ -14,34 +14,34 @@ function App() {
 
   const firstUpdate = useRef(true);
 
-  // useEffect(() => {
-  //   if (firstUpdate.current) {
-  //     firstUpdate.current = false;
-  //     return;
-  //   }
+  useEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
 
-  //   axios({
-  //     method: 'GET',
-  //     url: 'https://coingecko.p.rapidapi.com/coins/markets',
-  //     params: {
-  //       vs_currency: 'usd',
-  //       order: 'market_cap_desc',
-  //       ids: searchBit,
+    axios({
+      method: 'GET',
+      url: 'https://coingecko.p.rapidapi.com/coins/markets',
+      params: {
+        vs_currency: 'usd',
+        order: 'market_cap_desc',
+        ids: searchBit,
 
-  //     },
-  //     headers: {
-  //       'x-rapidapi-host': 'coingecko.p.rapidapi.com',
-  //       'x-rapidapi-key': '836053b102mshb0f14f728934a07p13c433jsne14af3cc3797'
-  //     }
-  //   }).then((response) => {
-  //     console.log(response.data);
-  //     setBit(response.data);
-  //   })
-  //     .catch(function (error) {
-  //       console.error(error);
-  //     })
+      },
+      headers: {
+        'x-rapidapi-host': 'coingecko.p.rapidapi.com',
+        'x-rapidapi-key': '836053b102mshb0f14f728934a07p13c433jsne14af3cc3797'
+      }
+    }).then((response) => {
+      console.log(response.data);
+      setBit(response.data);
+    })
+      .catch(function (error) {
+        console.error(error);
+      })
 
-  // }, [searchBit]);
+  }, [searchBit]);
 
   const handleInput = (event) => {
     setUserInput(event.target.value);
