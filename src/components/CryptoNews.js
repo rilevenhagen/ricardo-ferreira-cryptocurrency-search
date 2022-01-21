@@ -1,4 +1,4 @@
-// crypto news
+// crypto news DISPLAY
 
 const CryptoNews = (props) => {
     return (
