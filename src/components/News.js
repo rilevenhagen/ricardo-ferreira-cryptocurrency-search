@@ -1,9 +1,12 @@
-// News display
+// News display  
 
 const News = (props) => {
 console.log(props)
     return (
         <div>
+            <div className="wrapper title">
+                <h3>⬇️ Some world news. ⬇️</h3>
+            </div>
             <div>
                 {props.news.map((displayNew, index) => {
                     return (

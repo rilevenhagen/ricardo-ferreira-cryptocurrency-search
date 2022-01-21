@@ -1,15 +1,21 @@
 // crypto news
 
 const CryptoNews = (props) => {
-    return(
+    return (
         <div className="wrapper">
+            <div className="title wrapper">
+                <h3>⬇️ cryptocurrency news.⬇️</h3>
+            </div>
             {props.cryptNews.map((cryptNewsDisplay) => {
-                console.log(cryptNewsDisplay)
                 return (
-                    <div className="h3-img" key={cryptNewsDisplay.dateLong}>
-                        <h3>{cryptNewsDisplay.summary}</h3>
-                        <img src={cryptNewsDisplay.image} alt={cryptNewsDisplay.title} />
+                    <div>
+                        <div className="h3-img" key={cryptNewsDisplay.dateLong}>
+                            <h3>{cryptNewsDisplay.summary}</h3>
+                            <img className="img-news" src={cryptNewsDisplay.image} alt={cryptNewsDisplay.title} />
+                        </div>
+
                     </div>
+
                 )
             })
 
