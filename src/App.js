@@ -14,6 +14,7 @@ function App() {
   const [userInput, setUserInput] = useState('');
   const [searchBit, setSearchBit] = useState('');
 
+//CRIPTOCURRENCY API
 
   const firstUpdate = useRef(true);
 
@@ -36,7 +37,6 @@ function App() {
         'x-rapidapi-key': '836053b102mshb0f14f728934a07p13c433jsne14af3cc3797'
       }
     }).then((response) => {
-      // console.log(response.data);
       setBit(response.data);
     })
       .catch(function (error) {
@@ -44,7 +44,6 @@ function App() {
       })
 
   }, [searchBit]);
-
 
 
   const handleInput = (event) => {
@@ -58,6 +57,7 @@ function App() {
     setUserInput('');
   }
 
+// APIA GENERAL NEWS FROM N. Y. TIMES
 
   const [news, setNews] = useState([]);
   const [news2, setNews2] = useState([]);
@@ -74,7 +74,6 @@ function App() {
         'x-rapidapi-key': 'ba03013e72msh29791eea6f2075fp118b2ejsn1f7186d6140e'
       }
     }).then(function (response) {
-      // console.log(response.data.business);
       setNews(response.data.business)
       setNews2(response.data.politics)
       setNews3(response.data.world)
@@ -83,6 +82,8 @@ function App() {
     });
   }, []);
 
+
+  // GENERAL NEWS FROM CRYPTOCURRENCY
 
 const [cryptNews, setCryptoNews] = useState([]);
 
@@ -98,7 +99,6 @@ const [cryptNews, setCryptoNews] = useState([]);
         'x-rapidapi-key': 'ba03013e72msh29791eea6f2075fp118b2ejsn1f7186d6140e',
       }
     }).then(function (response) {
-      console.log(response.data);
       setCryptoNews(response.data)
     }).catch(function (error) {
       console.error(error);
