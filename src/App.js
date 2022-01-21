@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { useEffect, useState, useRef } from 'react';
 import './App.css';
-import Footer from './Footer';
-import Header from './Header';
+import Footer from './components/Footer';
+import Header from './components/Header.js';
+import News from './components/News.js';
+import Bitcoin from './components/Bitcoin.js';
+import CryptoNews from "./components/CryptoNews.js";
 
 
 function App() {
@@ -27,14 +30,13 @@ function App() {
         vs_currency: 'usd',
         order: 'market_cap_desc',
         ids: searchBit,
-
       },
       headers: {
         'x-rapidapi-host': 'coingecko.p.rapidapi.com',
         'x-rapidapi-key': '836053b102mshb0f14f728934a07p13c433jsne14af3cc3797'
       }
     }).then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setBit(response.data);
     })
       .catch(function (error) {
@@ -42,6 +44,8 @@ function App() {
       })
 
   }, [searchBit]);
+
+
 
   const handleInput = (event) => {
     setUserInput(event.target.value);
@@ -57,75 +61,80 @@ function App() {
 
   const [news, setNews] = useState([]);
   const [news2, setNews2] = useState([]);
+  const [news3, setNews3] = useState([]);
 
 
+  useEffect(() => {
+
+    axios({
+      method: 'GET',
+      url: 'https://ny-times-news-titles-and-urls.p.rapidapi.com/news',
+      headers: {
+        'x-rapidapi-host': 'ny-times-news-titles-and-urls.p.rapidapi.com',
+        'x-rapidapi-key': 'ba03013e72msh29791eea6f2075fp118b2ejsn1f7186d6140e'
+      }
+    }).then(function (response) {
+      // console.log(response.data.business);
+      setNews(response.data.business)
+      setNews2(response.data.politics)
+      setNews3(response.data.world)
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }, []);
 
 
-useEffect(() => {
-
-  axios({
-    method: 'GET',
-    url: 'https://ny-times-news-titles-and-urls.p.rapidapi.com/news',
-    headers: {
-      'x-rapidapi-host': 'ny-times-news-titles-and-urls.p.rapidapi.com',
-      'x-rapidapi-key': 'ba03013e72msh29791eea6f2075fp118b2ejsn1f7186d6140e'
-    }
-  }).then(function (response) {
-    console.log(response.data.business);
-    setNews(response.data.business)
-    setNews2(response.data.politics)
-  }).catch(function (error) {
-    console.error(error);
-  });
-}, []);
+const [cryptNews, setCryptoNews] = useState([]);
 
 
+  useState(() => {
 
-
+    axios({
+      method: 'GET',
+      url: 'https://newsx.p.rapidapi.com/search',
+      params: { q: 'cryptocurrency', limit: '10', skip: '0' },
+      headers: {
+        'x-rapidapi-host': 'newsx.p.rapidapi.com',
+        'x-rapidapi-key': 'ba03013e72msh29791eea6f2075fp118b2ejsn1f7186d6140e',
+      }
+    }).then(function (response) {
+      console.log(response.data);
+      setCryptoNews(response.data)
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }, []);
+  
   return (
-    <div className='for-img' > 
+    <div className='for-img' >
       <div className="content-container">
-      <Header
+        
+
+        <Header
           handleInput={handleInput}
           handleSubmit={handleSubmit}
           setUserInput={setUserInput}
           userInput={userInput}
-      />
+        />
 
-      <div>
-        {news.map((displayNew) => {
-          return(
-            <div className='wrapper'>
-              <h3>News: {displayNew.title}</h3>
-            </div>
-          )
-        })
+        {
+          bitcoin.length !== 0 ? 
+        <Bitcoin 
+              bitcoin={bitcoin}
+              userInput={userInput}
+              searchBit={searchBit}
+        />
+        : 
+        (
+        <>
+        <CryptoNews cryptNews={cryptNews}/>
+        <News
+              news={news}
+              news2={news2}
+              news3={news3} />
+        </>
+        )
         }
-      </div>
-        <div>
-          {news2.map((displayNew) => {
-            return (
-              <div className='wrapper'>
-                <h3>News: {displayNew.title}</h3>
-              </div>
-            )
-          })
-          }
-        </div>
-        <div>
-        {bitcoin.map((bit) => {
-
-          return (
-            <div className='bit-display'  key={bit.id}>
-              <h2>Name of the Coin: {bit.name}</h2>
-              <h2>Corrent Price: ${bit.current_price}</h2>
-              <h2>Market Cap: {bit.market_cap}</h2>
-              <h2>Symbol: {bit.symbol}</h2>
-              <img src={bit.image} alt={bit.name} />
-            </div>
-          )
-        })}
-      </div>
       </div>
       <Footer />
     </div>
