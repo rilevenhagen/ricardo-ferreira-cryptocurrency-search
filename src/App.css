@@ -253,6 +253,10 @@ img{
     width: 65%;
   }
 
+  h1{
+    font-size: 3rem;
+  }
+
   h2 {
     text-align: center;
     font-size: 1.4rem;
@@ -298,7 +302,7 @@ h1{
 }
 
 h3{
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   padding: 3px;
 }
 
@@ -325,11 +329,11 @@ h3{
 }
 
   h1{
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 h3{
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   padding: 3px;
 }
 
@@ -339,8 +343,15 @@ h3{
   p{
   font-size: 1rem;
 }
+
+button{
+  font-size: 0.9rem;
+
+}
+
   footer{
     height: 82px;
+    height: 1.3rem;
 } 
 
 }
