@@ -47,7 +47,7 @@ function App() {
 
 
   const handleInput = (event) => {
-    setUserInput(event.target.value);
+    setUserInput(event.target.value.toLowerCase());
   }
 
 
