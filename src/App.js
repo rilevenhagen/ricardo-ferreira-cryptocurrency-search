@@ -62,7 +62,7 @@ function App() {
   const [news, setNews] = useState([]);
   const [news2, setNews2] = useState([]);
   const [news3, setNews3] = useState([]);
-
+const [news4, setNews4] = useState([]);
 
   useEffect(() => {
 
@@ -77,6 +77,7 @@ function App() {
       setNews(response.data.business)
       setNews2(response.data.politics)
       setNews3(response.data.world)
+      // setNews4(response.data.world)
     }).catch(function (error) {
       console.error(error);
     });
@@ -131,7 +132,9 @@ const [cryptNews, setCryptoNews] = useState([]);
         <News
               news={news}
               news2={news2}
-              news3={news3} />
+              news3={news3} 
+              // news4={news4}
+              />
         </>
         )
         }
