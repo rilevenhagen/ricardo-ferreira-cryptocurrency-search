@@ -67,17 +67,17 @@ const [news4, setNews4] = useState([]);
   useEffect(() => {
 
     axios({
-      method: 'GET',
-      url: 'https://ny-times-news-titles-and-urls.p.rapidapi.com/news',
-      headers: {
-        'x-rapidapi-host': 'ny-times-news-titles-and-urls.p.rapidapi.com',
-        'x-rapidapi-key': 'ba03013e72msh29791eea6f2075fp118b2ejsn1f7186d6140e'
-      }
+  method: 'GET',
+  url: 'https://mboum-finance.p.rapidapi.com/ne/news',
+  headers: {
+    'X-RapidAPI-Host': 'mboum-finance.p.rapidapi.com',
+    'X-RapidAPI-Key': '836053b102mshb0f14f728934a07p13c433jsne14af3cc3797'
+  }
     }).then(function (response) {
-      setNews(response.data.business)
-      setNews2(response.data.politics)
-      setNews3(response.data.world)
-      // setNews4(response.data.world)
+      console.log(response)
+      setNews(response.data)
+      setNews2(response.data)
+      setNews3(response.data)
     }).catch(function (error) {
       console.error(error);
     });

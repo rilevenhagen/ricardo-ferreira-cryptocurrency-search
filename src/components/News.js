@@ -1,7 +1,7 @@
 // News display  
 
 const News = (props) => {
-console.log(props)
+// console.log(props)
     return (
         <div>
             <div className="wrapper title">
